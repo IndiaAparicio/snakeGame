@@ -1,13 +1,21 @@
-//
-//  ofFood.hpp
-//  mySnakeGame
-//
-//  Created by India Aparicio on 07.05.22.
-//
+#pragma once
 
-#ifndef ofFood_hpp
-#define ofFood_hpp
+#include "ofMain.h"
 
-#include <stdio.h>
 
-#endif /* ofFood_hpp */
+class ofFood {
+public:
+
+    ofFood();
+    ~ofFood();
+
+    int scl = 50;
+    
+    ofColor color;
+    ofVec2f myPos{};
+
+    void pickLocation();
+    void drawFood();
+
+
+};

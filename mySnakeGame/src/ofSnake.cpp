@@ -21,6 +21,9 @@ ofSnake::~ofSnake() {
 void ofSnake::updateSnake() {
 
     for (int i = 0; i <= total - 1; i++) {
+        
+        // tail[i+1] ist eine sehr unsichere zuweisung, weil du im array nicht sicher weißt
+        // ob an dieser stelle wirklich ein element gespeichert ist oder wo stellst du das sicher?
         tail[i] = tail[i + 1];
         firstPosSave = true;
     }
@@ -49,6 +52,13 @@ void ofSnake::drawSnake() {
     //draw tail
     for (int i = 0; i <= total-1; i++) {
         ofDrawRectangle(tail[i].x, tail[i].y, scl, scl);
+        
+        
+        // hier wird immer das element in der ecke oben links
+        // gezeichnet, scheinbar sind alle x,y werte 0 im tail array 0, warum?
+        if (tail[i].x == 0 && tail[i].y == 0) {
+            cout << "zero " << endl;
+        }
     }
     
     //draw head

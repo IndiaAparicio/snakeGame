@@ -17,7 +17,7 @@ class ofApp : public ofBaseApp{
 
 		void keyPressed(int key);
 		
-		ofSnake mySnake;
-		ofFood myFood;
+    ofSnake mySnake{};
+    ofFood myFood{};
     
 };

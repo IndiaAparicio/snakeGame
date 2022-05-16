@@ -3,12 +3,6 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 
-    // these are just local variables that you don't use
-    // mySnake and myFood are initialized in the header ofApp.h already
-    // actually, we are lacking a proper constructor ofApp::ofApp
-	//ofSnake mySnake;
-	//ofFood myFood;
-
 	ofSetFrameRate(8);
 	ofBackground(0);
 }
@@ -18,7 +12,6 @@ void ofApp::update(){
 	
 	
 	mySnake.updateSnake();
-	mySnake.death();
 
 	if (mySnake.eat(myFood.myPos)) {
 		myFood.pickLocation();

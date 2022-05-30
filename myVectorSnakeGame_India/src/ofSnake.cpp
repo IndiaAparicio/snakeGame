@@ -27,17 +27,17 @@ void ofSnake::updateSnake() {
     // Hier ist das jetzt gerade (0,0), da es im constructor definiert wurde
 
     // calculate the new position based on speed/direction
-    head.x = head.x + xSpeed * scl;
-    head.y = head.y + ySpeed * scl;
+    head.x = head.x + xSpeed * *elementSize;
+    head.y = head.y + ySpeed * *elementSize;
     
     // clamp it at the window ends
     //head.x = ofClamp(head.x, 0, ofGetWidth() - scl);
     //head.y = ofClamp(head.y, 0, ofGetHeight() - scl);
     
-    if(head.x > ofGetWidth()-scl){head.x = 0;}
-    else if(head.x < 0){head.x = ofGetWidth()-scl;}
+    if(head.x > ofGetWidth()-*elementSize){head.x = 0;}
+    else if(head.x < 0){head.x = ofGetWidth()-*elementSize;}
     if(head.y >= ofGetHeight()){head.y = 0;}
-    else if(head.y <= 0-scl){head.y = ofGetHeight()-scl;}
+    else if(head.y <= 0-*elementSize){head.y = ofGetHeight()-*elementSize;}
     
     // the following two lines could be implemented better using a std:list<T> container
     // because it allows to push_front() and pop_front() elements
@@ -48,9 +48,11 @@ void ofSnake::updateSnake() {
     
     if (!hasEaten) {
         snake.pop_back();  // remove the last element only when the snake moves w/o having eaten
+		
     }
     else {
         hasEaten = !hasEaten; // in case the snake has eaten, keep the last element
+		ofSetColor(ofRandom(255), ofRandom(255), ofRandom(255));
     }
     
 }
@@ -58,13 +60,15 @@ void ofSnake::updateSnake() {
 
 void ofSnake::drawSnake() {
 
-    ofSetColor(color);
+	ofSetColor(color);
     
     for (int i = 0; i < snake.size(); i++) {
         
         //ofDrawBox(snake.at(i).x, snake.at(i).y, 0., scl, scl, scl/3);
-        ofDrawRectangle(snake.at(i).x, snake.at(i).y, scl, scl);
+        ofDrawRectangle(snake.at(i).x, snake.at(i).y, *elementSize, *elementSize);
     }
+
+
     
     
 }
@@ -73,10 +77,12 @@ void ofSnake::death() {
     ofVec2f head = snake.front(); // get the head
     
     for(int i = 2; i < snake.size(); i++){
-        if (head.distance(snake[i]) < scl){
+        if (head.distance(snake[i]) < *elementSize){
             
             snake.clear();
             snake.push_back(head); // insert the head right away when instantiating the snake
+
+			*score = 0;
         }
     }
     
@@ -95,7 +101,7 @@ bool ofSnake::eat(ofVec2f foodPos) {
 
     ofVec2f head = snake.front(); // get the head
     
-    if (head.distance(foodPos) < scl) {
+    if (head.distance(foodPos) < *elementSize) {
 
         hasEaten = true;
         

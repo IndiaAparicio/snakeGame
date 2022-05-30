@@ -3,7 +3,7 @@
 
 ofFood::ofFood() {
     
-    color.set(250, 0, 50);
+    foodColor.set(250, 0, 50);
     
     // set the first position of food randomly
     // otherwise food and snake have the same pos at (0,0) which leads to an error
@@ -18,6 +18,7 @@ ofFood::~ofFood() {
 
 void ofFood::pickLocation() {
 
+
     int cols = floor(ofGetWidth() / scl);
     int rows = floor(ofGetHeight() / scl);
 
@@ -25,12 +26,13 @@ void ofFood::pickLocation() {
     myPos.y = floor(ofRandom(rows))*scl;
 
     cout << "PICKED " << myPos.x << endl;
+	foodColor.set(ofRandom(255), ofRandom(255), ofRandom(255));
 }
 
 
 void ofFood::drawFood() {
     
-    ofSetColor(color);
+    ofSetColor(foodColor);
     ofDrawRectangle(myPos.x,myPos.y, scl, scl);
     //ofDrawBox(myPos.x,myPos.y, .0, scl, scl, scl/3);
 }

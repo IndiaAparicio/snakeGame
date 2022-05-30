@@ -9,9 +9,17 @@ void ofApp::setup(){
 	// ofSnake mySnake;
 	// ofFood myFood;
 
-	ofSetFrameRate(8);
+	ofSetFrameRate(gameSpeed);
 	ofBackground(0);
-    
+
+	snakeColor.set(255, 0, 255);
+
+	mySnake.score = &score;
+
+	myFood.elementSize = &elementSize;
+	mySnake.elementSize = &elementSize;
+	
+
     
     pointLight.setPosition(ofGetWidth()/2, ofGetHeight()/50, 600); //
     pointLight.setAmbientColor(ofFloatColor(0.0, 0.0, 0.));
@@ -26,11 +34,15 @@ void ofApp::setup(){
 void ofApp::update(){
 	
 	
+	myFood.scl = elementSize;
+
 	mySnake.updateSnake();
 	mySnake.death();
 
 	if (mySnake.eat(myFood.myPos)) {
+		snakeColor = myFood.foodColor;
 		myFood.pickLocation();
+		score += 1;
 	}
 
 }
@@ -40,17 +52,23 @@ void ofApp::draw(){
     
     //cam.begin();
     
-    pointLight.enable();
+    //pointLight.enable();
     //material.begin();
-    
+
+	
+	mySnake.color.set(snakeColor);
 	mySnake.drawSnake();
 	myFood.drawFood();
-    
+
+	ofSetColor(255, 255, 255);
+	ofDrawBitmapString("Your score: " + ofToString(score), 20, 40);
+
     //ofDisableDepthTest();
     //material.end();
-    pointLight.disable();
+    //pointLight.disable();
     //ofDisableLighting();
-    
+
+	
     //cam.end();
 }
 

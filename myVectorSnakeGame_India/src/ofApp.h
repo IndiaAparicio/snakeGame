@@ -22,7 +22,14 @@ class ofApp : public ofBaseApp{
     
     ofLight pointLight;
     ofMaterial material;
-   // ofEasyCam cam;
+
+
+	int score;
+	int elementSize = 50;
+	int gameSpeed = 5;
+
+	ofColor snakeColor;
+
     
     private:
         bool goesLeft = false;

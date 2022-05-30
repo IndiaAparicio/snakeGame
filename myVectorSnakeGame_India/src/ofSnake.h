@@ -3,7 +3,7 @@
 #include "ofMain.h"
 
 
-class ofSnake {
+class ofSnake  {
 
 public:
 
@@ -15,7 +15,8 @@ public:
 
 
     int scl;
-
+	int *score = reinterpret_cast<int*>(ofGetAppPtr());
+	int *elementSize = reinterpret_cast<int*>(ofGetAppPtr());
     
     bool hasEaten{false};
     
@@ -29,5 +30,5 @@ public:
 
     
     std::vector<ofVec2f> snake; // lets use a vector ("array") for the whole snake, head and tail
-    
+	std::vector<bool> gridList;
 };
